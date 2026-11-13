@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHITE SHIRT COFFEE | A Quiet Pour</title>
+<meta name="description" content="화이트셔츠커피 - 핸드드립과 스페셜티 커피">
+<!-- [수정가이드] 폰트: Montserrat(영문 타이틀), Pretendard(한글/본문) -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Header (GNB) =====
+ [수정가이드] 메뉴 추가: <li><a href="#id" data-spy>이름</a></li> 추가 후 같은 id의 <section> 생성 -->
+<header class="gnb" id="gnb">
+  <a href="#hero" class="logo">WHITE SHIRT COFFEE</a>
+  <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+  <nav id="nav">
+    <ul>
+      <li><a href="#about" data-spy data-ko="브랜드">ABOUT</a></li>
+      <li><a href="#menu" data-spy data-ko="메뉴소개">MENU</a></li>
+      <li><a href="#shop" data-spy data-ko="온라인스토어">SHOP</a></li>
+      <li><a href="#news" data-spy data-ko="소식">NEWS</a></li>
+      <li><a href="#contact" data-spy data-ko="문의/제휴">CONTACT</a></li>
+    </ul>
+  </nav>
+  <!-- 우측 고정 CS 버튼 (모바일은 하단 플로팅으로 표시) -->
+  <a href="#contact" class="cs-btn" id="csBtn">CS</a>
+</header>
+
+<main>
+<!-- ===== Section 1. HERO =====
+ [수정가이드] 마우스(터치)를 움직여 주전자를 서버 위로 가져가면 커피가 추출됩니다. 추출 완료 시 로고/슬로건 등장.
+ 슬로건 문구는 .hero-reveal 안에서 수정 -->
+<section id="hero" class="hero">
+<div class="drip" id="drip" aria-hidden="true">
+    <!-- [수정가이드] 주전자/드리퍼/서버는 인라인 SVG 입니다. 사진(투명 PNG)으로 바꾸려면 <svg>...</svg> 를 <img src="..."> 로 교체하고
+         js/main.js 의 CFG 값(주둥이 위치 등)을 맞춰주세요. -->
+    <!-- 주전자 (구즈넥 드립 케틀) -->
+    <div class="kettle" id="kettle">
+      <svg viewBox="0 0 200 120" width="180" height="108">
+        <path d="M64 100 C40 98 30 80 24 62 C20 50 14 42 5 42" fill="none" stroke="#292724" stroke-width="7" stroke-linecap="round"/><!-- 구즈넥 주둥이 -->
+        <path d="M62 46 Q60 46 60 52 L62 104 Q62 112 70 112 L148 112 Q156 112 158 104 L160 52 Q160 46 156 46Z" fill="#292724"/><!-- 몸통 -->
+        <rect x="66" y="38" width="86" height="10" rx="4" fill="#3d3a36"/><circle cx="109" cy="31" r="6" fill="#A67C52"/><!-- 뚜껑/손잡이 -->
+        <path d="M160 58 C192 56 192 98 156 100" fill="none" stroke="#292724" stroke-width="7" stroke-linecap="round"/><!-- 손잡이 -->
+        <path d="M72 58 L74 100" stroke="rgba(255,255,255,.14)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="stream" id="stream"></div>
+    <!-- 드리퍼 + 서버 -->
+    <div class="server" id="server">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <svg viewBox="0 0 200 260" width="200" height="260">
+        <defs><clipPath id="glassClip"><path d="M82 96 L82 118 C82 126 36 140 36 190 L36 232 Q36 248 52 248 L148 248 Q164 248 164 232 L164 190 C164 140 118 126 118 118 L118 96Z"/></clipPath></defs>
+        <path d="M164 150 C196 150 196 214 162 214" fill="none" stroke="#292724" stroke-width="5" stroke-linecap="round"/><!-- 서버 손잡이 -->
+        <path d="M82 96 L82 118 C82 126 36 140 36 190 L36 232 Q36 248 52 248 L148 248 Q164 248 164 232 L164 190 C164 140 118 126 118 118 L118 96Z" fill="rgba(255,255,255,.6)" stroke="#292724" stroke-width="3"/><!-- 유리 서버 -->
+        <g clip-path="url(#glassClip)"><rect id="fillRect" x="30" y="248" width="140" height="0" fill="#5a3d25"/></g><!-- 추출된 커피(JS가 높이 조절) -->
+        <rect x="70" y="90" width="60" height="7" rx="3" fill="#292724"/>
+        <path d="M34 18 L166 18 L112 84 L88 84Z" fill="#fff" stroke="#292724" stroke-width="3" stroke-linejoin="round"/><!-- 드리퍼 -->
+        <path d="M62 22 L94 80 M100 22 L100 80 M138 22 L106 80" stroke="#e0d9cc" stroke-width="2"/>
+        <rect x="30" y="12" width="140" height="8" rx="4" fill="#fff" stroke="#292724" stroke-width="3"/>
+        <path d="M166 24 q22 0 22 14 q0 10 -16 12" fill="none" stroke="#292724" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span class="dropl"></span>
+    </div>
+  </div>
+  <p class="hint" id="hint">주전자를 움직여 드리퍼 위에서 커피를 내려보세요</p>
+  <div class="hero-reveal" id="heroReveal">
+    <h1>WHITE SHIRT COFFEE</h1>
+    <p>단정하게 내린 한 잔, A Quiet Pour</p>
+    <a href="#about" class="btn">브랜드 이야기 보기</a>
+  </div>
+  <button class="skip" id="skipBtn">바로 완성하기</button>
+</section>
+
+<!-- ===== Section 2. ABOUT =====
+ [수정가이드] 이미지는 <img src> 주소만 교체. 텍스트는 .about-text 안에서 수정. 스크롤 시 .reveal 요소가 나타납니다. -->
+<section id="about" class="section">
+  <div class="wrap about-grid">
+    <div class="about-text reveal">
+      <h2>화이트셔츠커피 이야기</h2>
+      <p>흰 셔츠처럼 단정하고 깨끗한 한 잔을 목표로 시작했습니다. 원두 본연의 향을 해치지 않도록 핸드드립으로 천천히 추출합니다.</p>
+      <p>산지와 가공 방식을 직접 확인한 스페셜티 원두만 사용하고, 매일 로스팅 상태를 점검합니다.</p>
+      <ul class="keywords"><li>Hand Drip</li><li>Specialty</li><li>Slow Bar</li></ul>
+    </div>
+    <div class="about-img reveal">
+      <!-- 이미지 교체: src 변경 (alt는 접근성을 위해 유지) -->
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=900&q=80" alt="핸드드립으로 커피를 내리는 바리스타" loading="lazy">
+    </div>
+    <div class="about-img wide reveal">
+      <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1400&q=80" alt="화이트셔츠커피 매장 내부" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== Section 3. MENU =====
+ [수정가이드] 메뉴 데이터는 js/main.js 의 MENU_DATA 배열에서 수정합니다. 탭 버튼은 자동 생성됩니다. -->
+<section id="menu" class="section alt">
+  <div class="wrap">
+    <h2 class="reveal">MENU</h2>
+    <div class="tabs reveal" id="menuTabs" role="tablist"></div>
+    <div class="grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Section 4. SHOP =====
+ [수정가이드] 상품 데이터는 js/main.js 의 PRODUCTS 배열에서 수정합니다. (재고 status: sale / soldout / soon) -->
+<section id="shop" class="section">
+  <div class="wrap">
+    <h2 class="reveal">SHOP</h2>
+    <div class="tabs reveal" id="shopTabs" role="tablist"></div>
+    <div class="grid" id="shopGrid"></div>
+  </div>
+</section>
+
+<!-- 상품 상세 모달 -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ===== Section 5. NEWS =====
+ [수정가이드] 소식 카드는 js/main.js 의 NEWS_DATA 에서 수정합니다. -->
+<section id="news" class="section alt">
+  <div class="wrap">
+    <h2 class="reveal">NEWS</h2>
+    <div class="grid news-grid" id="newsGrid"></div>
+    <form class="newsletter reveal" id="newsForm" novalidate>
+      <h3>뉴스레터 구독</h3>
+      <p>신제품과 팝업 소식을 가장 먼저 받아보세요.</p>
+      <div class="row">
+        <label for="nlEmail" class="sr">이메일</label>
+        <input type="email" id="nlEmail" placeholder="이메일 주소를 입력하세요" required>
+        <button class="btn" type="submit">구독하기</button>
+      </div>
+      <p class="msg" id="nlMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Section 6. CONTACT =====
+ [수정가이드] 주소/운영시간/연락처는 .info 안에서 수정. 지도는 iframe src 교체(구글맵 > 공유 > 지도 퍼가기). -->
+<section id="contact" class="section">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <h2>CONTACT</h2>
+      <dl class="info">
+        <dt>주소</dt><dd>전남광주 서구 월드컵4강로182번길 21 지하1층</dd>
+        <dt>운영시간</dt><dd>매일 12:00 – 22:00 (라스트오더 21:30, 수요일 17:30)<br> 
+          - 연중무휴이며 매주 수요일은 18시까지 영업합니다</dd>
+        <dt>전화</dt><dd>0507-1310-0596</dd>
+        <dt>이메일</dt><dd>whiteshirt_juicy@naver.com</dd>
+      </dl>
+<iframe class="map" id="storeMap" title="매장 위치 지도" loading="lazy"
+  src="https://maps.google.com/maps?q=광주 서구 월드컵4강로182번길 21&output=embed&hl=ko"></iframe>
+    </div>
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <h3>문의하기</h3>
+      <label>문의 유형
+        <select id="cType">
+          <option>고객지원 (상품·주문·배송·교환/환불)</option>
+          <option>도매 및 납품 문의</option>
+          <option>브랜드 협업 및 제휴 제안</option>
+        </select>
+      </label>
+      <label>이름 <input type="text" id="cName" required></label>
+      <label>이메일 <input type="email" id="cMail" required></label>
+      <label>내용 <textarea id="cBody" rows="5" required></textarea></label>
+      <button class="btn" type="submit">문의 보내기</button>
+      <p class="msg" id="cMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <strong class="logo">WHITE SHIRT COFFEE</strong>
+    <p class="links">
+      <a href="https://www.instagram.com/whiteshirtcoffee_juicy" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://smartstore.naver.com/whiteshirtcoffee" target="_blank" rel="noopener">네이버 스마트스토어</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </p>
+    <p>고객센터 02-000-0000 · hello@whiteshirtcoffee.com</p>
+    <p>상호: 화이트셔츠커피로스터스 | 사업자등록번호: 356-43-00782 | 전남광주 서구 월드컵4강로182번길 21 지하1층</p>
+    <p>© 2018 WHITE SHIRTS COFFEE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
